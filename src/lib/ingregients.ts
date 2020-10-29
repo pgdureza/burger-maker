@@ -41,8 +41,8 @@ const ingredients: Record<IngredientType, IngredientData> = {
   beefPatty: { src: beefPatty, height: 40 },
   bellpeppers: { src: bellpeppers, height: 10 },
   bunBottom: { src: bunBottom, height: 20 },
-  bunMiddle: { src: bunMiddle, height: 10 },
-  bunTop: { src: bunTop, height: 20 },
+  bunMiddle: { src: bunMiddle, height: 15 },
+  bunTop: { src: bunTop, height: 50 },
   cheeseCheddar: { src: cheeseCheddar, height: 20 },
   cheeseMelted: { src: cheeseMelted, height: 20 },
   chickenPatty: { src: chickenPatty, height: 40 },
@@ -51,7 +51,7 @@ const ingredients: Record<IngredientType, IngredientData> = {
   mushrooms: { src: mushrooms, height: 10 },
   onions: { src: onions, height: 10 },
   pickles: { src: pickles, height: 10 },
-  tomatoes: { src: tomatoes, height: 10 },
+  tomatoes: { src: tomatoes, height: 15 },
 };
 
 export default ingredients;
