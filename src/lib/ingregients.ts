@@ -15,12 +15,12 @@ import pickles from "../images/pickles.png";
 import tomatoes from "../images/tomatoes.png";
 
 export type IngredientType =
-  | "bacon"
-  | "beefPatty"
-  | "bellpeppers"
   | "bunBottom"
   | "bunMiddle"
   | "bunTop"
+  | "bacon"
+  | "beefPatty"
+  | "bellpeppers"
   | "cheeseCheddar"
   | "cheeseMelted"
   | "chickenPatty"
@@ -38,14 +38,14 @@ interface IngredientData {
 
 const ingredients: Record<IngredientType, IngredientData> = {
   bacon: { src: bacon, height: 30 },
-  beefPatty: { src: beefPatty, height: 40 },
+  beefPatty: { src: beefPatty, height: 20 },
   bellpeppers: { src: bellpeppers, height: 10 },
   bunBottom: { src: bunBottom, height: 20 },
   bunMiddle: { src: bunMiddle, height: 15 },
   bunTop: { src: bunTop, height: 50 },
-  cheeseCheddar: { src: cheeseCheddar, height: 20 },
-  cheeseMelted: { src: cheeseMelted, height: 20 },
-  chickenPatty: { src: chickenPatty, height: 40 },
+  cheeseCheddar: { src: cheeseCheddar, height: 10 },
+  cheeseMelted: { src: cheeseMelted, height: 10 },
+  chickenPatty: { src: chickenPatty, height: 20 },
   egg: { src: egg, height: 10 },
   lettuce: { src: lettuce, height: 10 },
   mushrooms: { src: mushrooms, height: 10 },

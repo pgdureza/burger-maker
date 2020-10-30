@@ -1,26 +1,11 @@
 import React from "react";
 import "./assets/main.css";
-import Burger from "./components/Burger";
+import BurgerAssembly from "./components/BurgerAssembly";
 
 const App: React.FC = () => {
   return (
-    <div className="text-red-900">
-      <Burger
-        ingredients={[
-          "bunTop",
-          "bacon",
-          "tomatoes",
-          "cheeseMelted",
-          "lettuce",
-          "cheeseCheddar",
-          "egg",
-          "chickenPatty",
-          "bunMiddle",
-          "lettuce",
-          "beefPatty",
-          "bunBottom",
-        ]}
-      />
+    <div className="text-blue-600 flex items-center justify-center min-h-screen">
+      <BurgerAssembly ingredients={["bunTop", "beefPatty", "bunBottom"]} />
     </div>
   );
 };

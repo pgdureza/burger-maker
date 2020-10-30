@@ -3,3 +3,12 @@
 @tailwind components;
 
 @tailwind utilities;
+
+* {
+  box-sizing: content-box;
+}
+
+html,
+body {
+  font-family: "Indie Flower", cursive;
+}

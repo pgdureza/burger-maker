@@ -11843,6 +11843,10 @@ video {
   min-width: 0;
 }
 
+.min-w-48 {
+  min-width: 12rem;
+}
+
 .min-w-full {
   min-width: 100%;
 }
@@ -16277,6 +16281,10 @@ video {
   z-index: 50;
 }
 
+.z-999 {
+  z-index: 999;
+}
+
 .z-auto {
   z-index: auto;
 }
@@ -19198,6 +19206,15 @@ video {
 
 .animate-bounce {
   animation: bounce 1s infinite;
+}
+
+* {
+  box-sizing: content-box;
+}
+
+html,
+body {
+  font-family: "Indie Flower", cursive;
 }
 
 @media (min-width: 640px) {
@@ -30467,6 +30484,10 @@ video {
     min-width: 0;
   }
 
+  .sm\:min-w-48 {
+    min-width: 12rem;
+  }
+
   .sm\:min-w-full {
     min-width: 100%;
   }
@@ -34899,6 +34920,10 @@ video {
 
   .sm\:z-50 {
     z-index: 50;
+  }
+
+  .sm\:z-999 {
+    z-index: 999;
   }
 
   .sm\:z-auto {
@@ -49061,6 +49086,10 @@ video {
     min-width: 0;
   }
 
+  .md\:min-w-48 {
+    min-width: 12rem;
+  }
+
   .md\:min-w-full {
     min-width: 100%;
   }
@@ -53493,6 +53522,10 @@ video {
 
   .md\:z-50 {
     z-index: 50;
+  }
+
+  .md\:z-999 {
+    z-index: 999;
   }
 
   .md\:z-auto {
@@ -67655,6 +67688,10 @@ video {
     min-width: 0;
   }
 
+  .lg\:min-w-48 {
+    min-width: 12rem;
+  }
+
   .lg\:min-w-full {
     min-width: 100%;
   }
@@ -72087,6 +72124,10 @@ video {
 
   .lg\:z-50 {
     z-index: 50;
+  }
+
+  .lg\:z-999 {
+    z-index: 999;
   }
 
   .lg\:z-auto {
@@ -86249,6 +86290,10 @@ video {
     min-width: 0;
   }
 
+  .xl\:min-w-48 {
+    min-width: 12rem;
+  }
+
   .xl\:min-w-full {
     min-width: 100%;
   }
@@ -90681,6 +90726,10 @@ video {
 
   .xl\:z-50 {
     z-index: 50;
+  }
+
+  .xl\:z-999 {
+    z-index: 999;
   }
 
   .xl\:z-auto {

@@ -1,125 +1,117 @@
 import React from "react";
 import ingredientsLib, { IngredientType } from "../lib/ingregients";
 import Ingredient from "./Ingredient";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { FaMinus } from "react-icons/fa";
 import {
-  DragDropContext,
   Draggable,
   DraggableProvided,
   Droppable,
   DroppableProvided,
-  DropResult,
 } from "react-beautiful-dnd";
-import { reorder, remove } from "../lib/reorder";
 
 const BASEHEIGHT = 180;
 
-interface IngredientMap {
+export interface IngredientMap {
   type: IngredientType;
   id: string;
 }
 
+const Root = styled.div<{ expanded: boolean; count: number }>`
+  transition: all 0.5s ease;
+  height: ${({ count, expanded }) =>
+    expanded ? count * BASEHEIGHT : BASEHEIGHT}px;
+`;
+
 interface IProps {
-  ingredients: IngredientType[];
+  ingredients: IngredientMap[];
+  onRemove: (id: string) => void;
+  expanded: boolean;
+  compress: VoidFunction;
 }
 
 interface IIngredientPlacement {
   index: number;
   height: number;
-  expanded?: boolean;
-}
-
-interface IRoot {
-  height: number;
   expanded: boolean;
 }
 
-const Root = styled.div<IRoot>`
-  ${({ expanded }) => `
-    transition: all 0.55s ease;
-    margin-top: ${expanded ? 0 : 20}vh;
-  `}
-`;
-
 const IngredientPlacement = styled.div<IIngredientPlacement>`
   ${({ index, height, expanded }) => `
-    transition: all 0.55s ease;
+    transition: all 0.5s ease;
     margin-top: ${expanded ? 0 : (height - BASEHEIGHT) / 16}rem;
-    z-index: ${100 - index};
+    z-index: ${50 - index};
+    ${
+      expanded &&
+      css`
+        &:hover {
+          transform: scale(1.1);
+        }
+      `
+    }
   `}
 `;
 
-const Burger: React.FC<IProps> = ({ ingredients: defaultIngredients }) => {
-  const defaultMap = defaultIngredients.map((type, index) => ({
-    type,
-    id: `${type}${index}`,
-  }));
-
-  const [ingredients, setIngredients] = React.useState<IngredientMap[]>(
-    defaultMap
-  );
-
-  console.log({ ingredients });
-
-  const [expanded, setExpanded] = React.useState(false);
-
-  const expand = () => setExpanded(true);
-  const compress = () => setExpanded(false);
-
-  const onDragEnd = (result: DropResult) => {
-    if (!result.destination) {
-      setIngredients(remove(ingredients, result.source.index));
-    } else {
-      setIngredients(
-        reorder(ingredients, result.source.index, result.destination.index)
-      );
-    }
+const Burger: React.FC<IProps> = ({
+  ingredients,
+  onRemove,
+  compress,
+  expanded,
+}) => {
+  const onRemoveClick = (id: string) => () => {
+    onRemove(id);
   };
+
+  React.useEffect(() => {
+    if (ingredients.length === 0) {
+      compress();
+    }
+  }, [ingredients, compress]);
+
   return (
     <Root
+      className="mx-auto max-w-xs w-full relative"
       expanded={expanded}
-      onMouseEnter={expand}
-      onMouseLeave={compress}
-      className="relative mx-auto max-w-md w-full py-20 px-16"
-      height={ingredients.reduce(
-        (accum, curr) => accum + ingredientsLib[curr.type].height,
-        0
-      )}
+      count={ingredients.length}
     >
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="droppable">
-          {(provided: DroppableProvided) => (
-            <div {...provided.droppableProps} ref={provided.innerRef}>
-              {ingredients
-                .reverse()
-                .map((ingredient: IngredientMap, index: number) => (
-                  <Draggable
-                    key={ingredient.id}
-                    draggableId={ingredient.id}
-                    index={index}
+      <Droppable droppableId="burger">
+        {(provided: DroppableProvided) => (
+          <div {...provided.droppableProps} ref={provided.innerRef}>
+            {ingredients.map((ingredient: IngredientMap, index: number) => (
+              <Draggable
+                key={ingredient.id}
+                draggableId={ingredient.id}
+                index={index}
+              >
+                {(provided: DraggableProvided) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
                   >
-                    {(provided: DraggableProvided) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                      >
-                        <IngredientPlacement
-                          className="relative w-full"
-                          index={index}
-                          height={ingredientsLib[ingredient.type].height}
-                          expanded={expanded}
+                    <IngredientPlacement
+                      className="relative w-full"
+                      index={index}
+                      height={ingredientsLib[ingredient.type].height}
+                      expanded={expanded}
+                    >
+                      <Ingredient type={ingredient.type} />
+                      {expanded && (
+                        <div
+                          onClick={onRemoveClick(ingredient.id)}
+                          className="remove cursor-pointer absolute top-0 p-2 right-0 rounded-full bg-red-500 mr-2 mt-2 text-white flex justify-center items-cehnter text-xs opacity-50"
                         >
-                          <Ingredient type={ingredient.type} />
-                        </IngredientPlacement>
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+                          <FaMinus />
+                        </div>
+                      )}
+                    </IngredientPlacement>
+                  </div>
+                )}
+              </Draggable>
+            ))}
+          </div>
+        )}
+      </Droppable>
     </Root>
   );
 };
